@@ -25,7 +25,8 @@
                     <label for="{{ form.description.id_for_label }}">Descrição</label>
                     {{ form.description|add_class:"form-control" }}
                  </div>
-                    <button type="submit" class="btn btn-primary">Salvar</button>                           
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-primary" href="{% url 'specialties:list_specialties' %}">Cancelar</a>                           
                 </form>
             </div>
         </div>
