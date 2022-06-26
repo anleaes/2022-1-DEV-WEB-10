@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'core.apps.CoreConfig',
     'specialties.apps.SpecialtiesConfig',
+    'exams.apps.ExamsConfig',
 ]
 
 MIDDLEWARE = [
