@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import PatientForm
 from .models import Patient
 # Create your views here.
 
+@login_required(login_url='/contas/login/')
 def add_patient(request):
     template_name = 'patients/add_patient.html'
     context = {}
@@ -17,6 +19,7 @@ def add_patient(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def list_patients(request):
     template_name = 'patients/list_patients.html'
     patients = Patient.objects.filter()
@@ -25,6 +28,7 @@ def list_patients(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def edit_patient(request, id_patient):
     template_name = 'patients/add_patient.html'
     context ={}
@@ -38,11 +42,13 @@ def edit_patient(request, id_patient):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def delete_patient(request, id_patient):
     patient = Patient.objects.get(id=id_patient)
     patient.delete()
     return redirect('patients:list_patients')
 
+@login_required(login_url='/contas/login/')
 def search_patients(request):
     template_name = 'patients/list_patients.html'
     query = request.GET.get('query')
