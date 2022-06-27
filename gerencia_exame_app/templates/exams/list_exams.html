@@ -17,13 +17,14 @@
                     <a href="{% url 'exams:add_exam' %}">Cadastro de novo exame</a>
                 <br />
                 <br />
+
                 <table class="table table-hover">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Descrição</th>
-                    <th scope="col">Recomendação</th>                    
+                    <th scope="col">Ativo</th>
                     <th scope="col">Especialidade</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -35,8 +36,15 @@
                             <th scope="row">{{ exam.id }}</th>
                             <td>{{ exam.name }}</td>
                             <td>{{ exam.description }}</td>
-                            <td>{{ exam.recommendation }}</td>
-                            <td>{{ exam.specialty }}</td>                            
+                            <td>
+                                {% if exam.is_active == True %}
+                                    Ativo
+                                {% endif %}
+                                {% if exam.is_active == False %}
+                                    Inativo
+                                {% endif %}
+                            </td>
+                            <td>{{ exam.specialty }}</td>
                             <td>
                                 <a href="{% url 'exams:edit_exam' exam.id %}" class="btn btn-primary btn-sm">Editar</a>
                             </td>

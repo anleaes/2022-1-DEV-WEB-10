@@ -15,7 +15,7 @@
     <h5><b>Cadastro de Exame</b></h5>
         <div class="row">
             <div class ="col-md-12">
-                <form action="" method="POST"> 
+                <form action="" method="POST" enctype="multipart/form-data"> 
                 {% csrf_token %}
                 <div class="form-group">
                    <label for="{{ form.name.id_for_label }}">Nome</label>
@@ -26,15 +26,15 @@
                     {{ form.description|add_class:"form-control" }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.recommendation.id_for_label }}">Recomendação</label>
-                    {{ form.description|add_class:"form-control" }}
-                </div>                
+                    <label for="{{ form.is_active.id_for_label }}">Ativar</label>
+                    {{ form.is_active }}
+                </div>
                 <div class="form-group">
                     <label for="{{ form.specialty.id_for_label }}">Especialidade</label>
                     {{ form.specialty|add_class:"form-control" }}
-                </div>
+                </div>                
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a class="btn btn-primary" href="{% url 'exams:list_exams' %}">Cancelar</a>
+                    <a class="btn btn-primary" href="{% url 'exams:list_exams' %}">Cancelar</a>       
                 </form>
             </div>
         </div>

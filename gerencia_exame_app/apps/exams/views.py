@@ -30,7 +30,7 @@ def edit_exam(request, id_exam):
     context ={}
     exam = get_object_or_404(Exam, id=id_exam)
     if request.method == 'POST':
-        form = ExamForm(request.POST, request.FILES,  instance=exam)
+        form = ExamForm(request.POST, instance=exam)
         if form.is_valid():
             form.save()
             return redirect('exams:list_exams')
