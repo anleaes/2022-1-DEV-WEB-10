@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Resultados - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Resultados</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+            <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Itens de resultado</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <th scope="row">
+                                {% if result.status == 'Indisponivel' %}
+                                    <p style="color:darkgray;" >{{ result.id }}</p>
+                                {% else %}
+                                    {{ result.id }}
+                                {% endif %}
+                            </th>
+                            <td>
+                                {% if result.status == 'Indisponivel' %}
+                                    <p style="color:darkgray;" >{{ result.status }}</p>
+                                {% else %}
+                                    {{ result.status }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for result in results %}
+                                    {% if result.patient_id == patient.id %}
+                                        {% if result.status == 'Indisponivel' %}
+                                            <p style="color:darkgray;" >{{ patient.first_name }} {{ patient.last_name }}</p>
+                                        {% else %}
+                                            {{ patient.first_name }} {{ patient.last_name }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}   
+                            </td>                            
+                            <td>
+                                {% if result.status == 'Indisponivel' %}
+                                    <a href="#" class="btn btn-primary btn-sm disabled">Adicionar exames</a>
+                                {% else %}
+                                    <a href="{% url 'results:add_result_item' result.id %}" class="btn btn-primary btn-sm">Adicionar exames</a>
+                                {% endif %}
+                                <br /><br />
+                                {% for result_item in result_items %}
+                                    {% if result_item.result_id == result.id %}
+                                        Exame: {{ result_item.exam}}<br /> 
+                                        <a href="{% url 'results:delete_result_item' result_item.id %}">Excluir Exame</a><br /><br />
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url 'results:edit_result_status' result.id %}" class="btn btn-danger btn-sm ">Alterar Status</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'results:delete_result' result.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

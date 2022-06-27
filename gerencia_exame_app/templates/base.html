@@ -17,13 +17,14 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {% if user.is_authenticated %}
         <div class="collapse navbar-collapse" id="navbarsExample05">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown05">
                         <a class="dropdown-item" href="{% url 'patients:list_patients' %}">Pacientes</a>
-                        <a class="dropdown-item" href="">Resultados</a>                                                
+                        <a class="dropdown-item" href="{% url 'results:list_results' %}">Resultados</a>                                                
                         <a class="dropdown-item" href="{% url 'exams:list_exams' %}">Exames</a>
                         <a class="dropdown-item" href="{% url 'specialties:list_specialties' %}">Especialidades</a>                        
                     </div>
@@ -35,15 +36,16 @@
             </form>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nome de usuario</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.get_full_name|default:user.username }}</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown05">
-                            <a class="dropdown-item" href="#">Trocar senha</a>
-                            <a class="dropdown-item" href="#">Conta</a>                            
-                            <a class="dropdown-item" href="#">Sair</a>
+                            <a class="dropdown-item" href="{% url 'accounts:user_change_information' user.username %}">Conta</a>
+                            <a class="dropdown-item" href="{% url 'accounts:user_change_password' %}">Trocar senha</a>
+                            <a class="dropdown-item" href="{% url 'accounts:user_logout' %}">Sair</a>
                         </div>
                     </li>
                 </ul>
         </div>
+        {% endif %}
     </nav>
     
     {% block body %}
