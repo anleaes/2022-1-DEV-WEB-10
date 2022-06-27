@@ -22,9 +22,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown05">
-                        <a class="dropdown-item" href="#">Pacientes</a>
-                        <a class="dropdown-item" href="#">Agendamentos</a>
-                        <a class="dropdown-item" href="#">Resultados</a>                        
+                        <a class="dropdown-item" href="{% url 'patients:list_patients' %}">Pacientes</a>
+                        <a class="dropdown-item" href="#">Agendamentos</a>                                                
                         <a class="dropdown-item" href="{% url 'exams:list_exams' %}">Exames</a>
                         <a class="dropdown-item" href="{% url 'specialties:list_specialties' %}">Especialidades</a>                        
                     </div>

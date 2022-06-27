@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Pacientes - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Pacientes</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+                <br />
+                    <a href="{% url 'patients:add_patient' %}">Cadastro de novo paciente</a>
+                <br />
+                <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Gênero</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                        <tr>
+                            <th scope="row">{{ patient.id }}</th>
+                            <td>{{ patient.first_name }}</td>
+                            <td>{{ patient.last_name }}</td>
+                            <td>{{ patient.address }}</td>
+                            <td>{{ patient.cell_phone }}</td>
+                            <td>{{ patient.email }}</td>
+                            <td>{{ patient.gender }}</td>                            
+                            <td>
+                                <a href="{% url 'patients:edit_patient' patient.id %}" class="btn btn-primary btn-sm">Editar</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'patients:delete_patient' patient.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+                <a class="btn btn-primary" href="{% url 'core:home' %}">Voltar</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
