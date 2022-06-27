@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'specialties.apps.SpecialtiesConfig',
     'exams.apps.ExamsConfig',
     'patients.apps.PatientsConfig',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
